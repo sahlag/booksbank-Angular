@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+
+  constructor() {
+    // tslint:disable-next-line:prefer-const
+    let config = {
+      apiKey: 'AIzaSyAzir0PiQ4NMPnQEizCPePSybACItrlCGY',
+      authDomain: 'booksbank-f7d06.firebaseapp.com',
+      databaseURL: 'https://booksbank-f7d06.firebaseio.com',
+      projectId: 'booksbank-f7d06',
+      storageBucket: '',
+      messagingSenderId: '160126415127'
+    };
+    firebase.initializeApp(config);
+  }
 }
