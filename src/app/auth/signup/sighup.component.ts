@@ -36,6 +36,7 @@ export class SighupComponent implements OnInit {
 
     this.authService.createNewUser(email, password).then(
       () => {
+        console.log('connextion reussie');
         this.router.navigate(['/books']);
       },
       (error) => {
@@ -43,5 +44,4 @@ export class SighupComponent implements OnInit {
       }
     );
   }
-
 }
