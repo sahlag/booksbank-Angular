@@ -9,8 +9,8 @@ import * as firebase from 'firebase';
 export class AppComponent {
 
   constructor() {
-    // tslint:disable-next-line:prefer-const
-    let config = {
+
+    const config = {
       apiKey: 'AIzaSyAzir0PiQ4NMPnQEizCPePSybACItrlCGY',
       authDomain: 'booksbank-f7d06.firebaseapp.com',
       databaseURL: 'https://booksbank-f7d06.firebaseio.com',
