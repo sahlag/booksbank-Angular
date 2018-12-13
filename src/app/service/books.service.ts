@@ -65,6 +65,19 @@ export class BooksService {
   // suprimer un livre
 
   removeBook(book: Book) {
+
+    if (book.photo) {
+      const storageRef = firebase.storage().refFromURL(book.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
+
     const bookIndexToRemove = this.books.findIndex(
       (bookE1) => {
         if (bookE1 === book) {
@@ -77,4 +90,27 @@ export class BooksService {
     this.emitBooks();
   }
 
+  // uploader un photo
+
+  uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+        const almostUniqueFileName = Date.now().toString();
+        const upload = firebase.storage().ref()
+          .child('images/' + almostUniqueFileName + file.name).put(file);
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          () => {
+            resolve(upload.snapshot.downloadURL);
+          }
+        );
+      }
+    );
+}
 }
